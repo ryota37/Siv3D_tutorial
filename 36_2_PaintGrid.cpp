@@ -4,6 +4,7 @@ void Main()
 {
 	Scene::SetBackground(Palette::White);
 
+	// ここを Array<std::pair<Rect, Color>> squares; にすれば、色を後から変更できる？
 	Array<Rect> squares;
 
 	while (System::Update())
@@ -17,7 +18,9 @@ void Main()
 
 		for (const auto& square : squares) {
 			if(square.leftClicked()){
-				square.draw(Palette::Black);
+				// squareのPaletteをBlackに書き換えたい
+				// square.draw(Palette::Black); だけだと、次のフレームに変更が維持されない
+				
 			}
 		}
 
