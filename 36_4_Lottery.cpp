@@ -5,6 +5,9 @@ void Main()
     Scene::SetBackground(Palette::Mediumseagreen);
 
     String destination = U"Paris";
+    Array<String> buttonStatuses = {U"Stop", U"Start"};
+    int buttonStatus = 0;
+
 	bool isDestinationDetermined = false;
     const Array<String> destinations = 
     {
@@ -13,18 +16,15 @@ void Main()
 
     while(System::Update())
     {
-        // ランダムに行き先を表示するアプリだと思われる
-        // Parisのような都市名を白いボックス内に表示する
-            // (Copilotが出してくれた都市名セット) Paris, New York, Tokyo, London, Sydney, Rome, Seoul, Beijing, Moscow, Cairo
-        // Stopというボタンもあるので、それを押すと止まる？
-
 		if (!isDestinationDetermined) {
 			destination = destinations.choice();
 		}
 
-        SimpleGUI::Button(destination, Vec2{400,200}, 200);
-        if (SimpleGUI::Button(U"Stop", Vec2{400,400})) {
-			isDestinationDetermined = true;
+        SimpleGUI::Button(destination, Vec2{300,200}, 200);
+
+        if (SimpleGUI::Button(buttonStatuses[buttonStatus%2], Vec2{350,400},100)) {
+			isDestinationDetermined = !isDestinationDetermined;
+            buttonStatus += 1;
 		}
     }
 }
